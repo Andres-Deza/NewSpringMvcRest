@@ -35,7 +35,7 @@ pipeline {
                             nexusUrl: "192.168.1.192:8082",
                             groupId: pom.groupId,
                             version: pom.version,
-                            repository: "repository/TestMavenHost",
+                            repository: "TestMavenHost",
                             credentialsId: "nexus_auth",
                             artifacts: [
                                 [artifactId: pom.artifactId,
