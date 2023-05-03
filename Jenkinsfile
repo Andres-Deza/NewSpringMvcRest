@@ -22,7 +22,7 @@ pipeline {
         stage('SonarQube analysis') {
           steps {
             script {
-              def scannerHome = tool 'SonarScanner'
+              def scannerHome = tool 'SonarQubeConexion'
               withSonarQubeEnv('SonarQube') {
                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=PruebaPipelines -Dsonar.sources=src -Dsonar.host.url=http://192.168.1.192:9000 -Dsonar.login=sqp_ac73c8ce8270b65a4b9691a6453e5508e6a192f4"
               }
