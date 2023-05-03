@@ -32,11 +32,11 @@ pipeline {
                         nexusArtifactUploader(
                             nexusVersion: "nexus3",
                             protocol: "http",
-                            nexusUrl: "localhost:8081",
+                            nexusUrl: "192.168.1.192:8082",
                             groupId: pom.groupId,
                             version: pom.version,
-                            repository: "EjemploRepo",
-                            credentialsId: "NexusCredentials",
+                            repository: "repository/TestMavenHost",
+                            credentialsId: "nexus_auth",
                             artifacts: [
                                 [artifactId: pom.artifactId,
                                         classifier: '',
