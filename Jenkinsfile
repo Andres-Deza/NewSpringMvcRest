@@ -29,7 +29,8 @@ pipeline {
             }
           }
         }
-
+        
+        
         stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
@@ -62,5 +63,36 @@ pipeline {
             }
         
             } 
+            post {
+            success {
+                slackSend (color: 'good', message: "El build y deploy han sido exitosos")
+            }
+            failure {
+                slackSend (color: 'danger', message: "El build o deploy han fallado")
+            }
+            }
+            
+            def slackSend(def config) {
+            def slackToken = credentials('slack-token')
+            def slackBaseUrl = 'https://slack.com/api/chat.postMessage'
+            def message = [
+                channel: slackChannel,
+                attachments: [
+                    [
+                        color: config.color,
+                        text: config.message
+                    ]
+                ]
+            ]
+            def response = sh(
+                script: "curl -X POST -H 'Authorization: Bearer ${slackToken}' -H 'Content-type: application/json' --data '${message}' ${slackBaseUrl}",
+                returnStdout: true
+            )
+            echo "Mensaje enviado a Slack:"
+            echo "${response}"
+        }
+            
+            
+            
      }
 }
