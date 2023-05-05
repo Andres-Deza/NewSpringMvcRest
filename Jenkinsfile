@@ -63,7 +63,15 @@ pipeline {
             }
         
             } 
-            post {
+            
+            
+            
+            
+            
+     }
+    
+    
+    post {
             success {
                 slackSend (color: 'good', message: "El build y deploy han sido exitosos")
             }
@@ -71,9 +79,6 @@ pipeline {
                 slackSend (color: 'danger', message: "El build o deploy han fallado")
             }
             }
-            
-            
-            
-            
-     }
+    
+    
 }
