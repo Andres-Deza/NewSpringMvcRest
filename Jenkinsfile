@@ -72,25 +72,6 @@ pipeline {
             }
             }
             
-            def slackSend(def config) {
-            def slackToken = credentials('slack-token')
-            def slackBaseUrl = 'https://slack.com/api/chat.postMessage'
-            def message = [
-                channel: slackChannel,
-                attachments: [
-                    [
-                        color: config.color,
-                        text: config.message
-                    ]
-                ]
-            ]
-            def response = sh(
-                script: "curl -X POST -H 'Authorization: Bearer ${slackToken}' -H 'Content-type: application/json' --data '${message}' ${slackBaseUrl}",
-                returnStdout: true
-            )
-            echo "Mensaje enviado a Slack:"
-            echo "${response}"
-        }
             
             
             
